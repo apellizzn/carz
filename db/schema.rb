@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150826232021) do
+ActiveRecord::Schema.define(version: 20150827123623) do
 
   create_table "brands", force: true do |t|
     t.string   "name"
@@ -25,12 +25,14 @@ ActiveRecord::Schema.define(version: 20150826232021) do
     t.integer  "km"
     t.integer  "year"
     t.float    "power"
-    t.string   "location"
     t.string   "name"
     t.integer  "brand_id"
     t.text     "notes"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.float    "latitude"
+    t.float    "longitude"
+    t.string   "full_address"
   end
 
   add_index "cars", ["brand_id"], name: "index_cars_on_brand_id"
