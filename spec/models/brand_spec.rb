@@ -1,5 +1,14 @@
 require 'rails_helper'
 
-RSpec.describe Brand, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+describe Brand do
+  subject(:brand) { FactoryGirl.build :brand, name: name }
+
+  let(:name) { 'Seat' }
+
+  it { expect(brand).to be_valid }
+
+  context 'withouth name' do
+    let(:name) { nil }
+    it { expect(brand).to be_invalid }
+  end
 end

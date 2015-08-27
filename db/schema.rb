@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150827123623) do
+ActiveRecord::Schema.define(version: 20150827140210) do
 
   create_table "brands", force: true do |t|
     t.string   "name"
@@ -45,5 +45,13 @@ ActiveRecord::Schema.define(version: 20150827123623) do
   end
 
   add_index "fuels", ["car_id"], name: "index_fuels_on_car_id"
+
+  create_table "photos", force: true do |t|
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
+    t.integer  "car_id"
+  end
 
 end
