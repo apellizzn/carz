@@ -9,7 +9,7 @@ FactoryGirl.define do
     longitude 2.2
     name "MyString"
     notes "MyText"
-    brand nil
+    brand FactoryGirl.create :brand
     full_address nil
   end
 end

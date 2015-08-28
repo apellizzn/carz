@@ -16,4 +16,26 @@ class Car < ActiveRecord::Base
     (obj.longitude.present? and obj.longitude_changed?)
   }
   reverse_geocoded_by :latitude, :longitude, :address => :full_address
+
+  scope :from_price, -> (price) {
+    price ? where(price: price..Float::INFINITY) : Car.all
+  }
+  scope :to_price, -> (price) {
+    price ? where(price: 0..price) : Car.all
+  }
+
+  scope :from_km, -> (km) { km ? where(km: km..Float::INFINITY) : Car.all }
+  scope :to_km, -> (km) { km ? where(km: 0..km) : Car.all }
+
+  scope :from_power, -> (power) {
+    power ? where(power: power..Float::INFINITY) : Car.all
+  }
+  scope :to_power, -> (power) { power ? where(power: 0..power) : Car.all }
+
+  scope :from_year, -> (year) {
+    year ? where(year: year..Float::INFINITY) : Car.all
+  }
+  scope :to_year, -> (year) { year ? where(year: 0..year) : Car.all }
+
+  scope :of_color, -> (color) { color ? where(color: color) : Car.all }
 end
