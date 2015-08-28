@@ -18,6 +18,8 @@ gem 'geocoder'
 
 gem "paperclip", "~> 4.3"
 
+gem 'will_paginate'
+
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks

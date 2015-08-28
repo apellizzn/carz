@@ -3,7 +3,7 @@ require 'rails_helper'
 describe Brand do
   subject(:brand) { FactoryGirl.build :brand, name: name }
 
-  let(:name) { 'Seat' }
+  let(:name) { 'SEAT' }
 
   it { expect(brand).to be_valid }
 

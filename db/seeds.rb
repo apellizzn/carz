@@ -9,8 +9,9 @@ Car.delete_all
       color: Faker::Commerce.color, price: Faker::Commerce.price,
       km: Faker::Number.between(10_000, 160_000_000),
       brand: brand,
+      year: Faker::Number.between(2003, 2014),
       notes: Faker::Lorem.paragraph(2, false, 4),
-      latitude: location.latitude,
-      longitude: location.longitude
+      latitude: location.try(:latitude) || 42.88893647,
+      longitude: location.try(:longitude) || 23.66532111
   end
 end
