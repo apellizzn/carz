@@ -2,6 +2,31 @@ require 'rails_helper'
 
 describe CarsController do
 
+  describe 'POST /cars' do
+    let!(:brand) { FactoryGirl.create :brand }
+    [:km, :year, :name, :power, :color].each do |field|
+      context "without #{field}" do
+        before { post '/cars', car_params_without(field).merge({ brand_id: brand.id }) }
+
+        it { expect(response).to have_http_status(:unprocessable_entity) }
+
+        it "returns the error #{field} can't be blank" do
+          should_have_key field, ["can't be blank"]
+        end
+      end
+    end
+
+    context 'without brand_id' do
+      before { post '/cars', car_params }
+
+      it { expect(response).to have_http_status(:unprocessable_entity) }
+
+      it "returns the error brand_id can't be blank" do
+        should_have_key :brand_id, ["can't be blank"]
+      end
+    end
+  end
+
   describe "GET #index" do
 
     it "returns http success" do

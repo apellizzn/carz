@@ -5,10 +5,10 @@ describe Brand do
 
   let(:name) { 'SEAT' }
 
-  it { expect(brand).to be_valid }
+  it { should be_valid }
 
   context 'withouth name' do
     let(:name) { nil }
-    it { expect(brand).to be_invalid }
+    it { should be_invalid }
   end
 end

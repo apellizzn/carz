@@ -22,7 +22,7 @@ describe Car do
   [:name, :color, :km, :power, :year, :latitude, :longitude].each do |field|
     context "withouth #{field}" do
       let(field) { nil }
-      it { expect(car).to be_invalid }
+      it { should be_invalid }
     end
   end
 

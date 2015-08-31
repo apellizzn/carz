@@ -8,8 +8,20 @@ class CarsController < ApplicationController
       .paginate(pagination)
   end
 
+  def create
+    car = Car.new car_params
+    if car.save
+      render json: car, status: 201
+    else
+      render json: car.errors, status: 422
+    end
+  end
 
   private
+
+  def car_params
+    params.permit :name, :price, :km, :power, :year, :color, :latitude, :longitude
+  end
 
   def pagination
     {
