@@ -37,6 +37,10 @@ describe BrandsController do
       before { post '/brands', name: 'New' }
 
       it { expect(response).to have_http_status(:created) }
+
+      it 'creates a new Car' do
+        expect(Brand.count).to be 1
+      end
     end
   end
 end

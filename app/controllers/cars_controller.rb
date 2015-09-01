@@ -20,7 +20,8 @@ class CarsController < ApplicationController
   private
 
   def car_params
-    params.permit :name, :price, :km, :power, :year, :color, :latitude, :longitude
+    params.permit :name, :price, :km, :power, :year, :color,
+      :latitude, :longitude, :brand_id, :fuel_id
   end
 
   def pagination

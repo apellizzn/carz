@@ -5,6 +5,8 @@ module ParamsHelpers
   end
 
   def car_params
-    FactoryGirl.attributes_for(:car)
+    brand_id = FactoryGirl.create(:brand).id
+    fuel_id = FactoryGirl.create(:fuel).id
+    FactoryGirl.attributes_for(:car).merge({ brand_id: brand_id, fuel_id: fuel_id })
   end
 end

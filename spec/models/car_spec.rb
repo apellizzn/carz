@@ -4,9 +4,11 @@ describe Car do
   subject(:car) { FactoryGirl.build :car,
     name: name, color: color, km: km, power: power,
     latitude: latitude, longitude: longitude,
-    year: year, brand: brand, price: price
+    year: year, brand: brand, price: price, fuel: fuel
+
   }
 
+  let(:fuel)      { FactoryGirl.create :fuel }
   let(:brand)     { FactoryGirl.create :brand, name: 'Ferrari' }
   let(:name)      { 'Car name' }
   let(:color)     { 'Red' }
@@ -19,7 +21,7 @@ describe Car do
 
   it { expect(car).to be_valid }
 
-  [:name, :color, :km, :power, :year, :latitude, :longitude].each do |field|
+  [:name, :color, :km, :power, :year, :latitude, :longitude, :brand, :fuel].each do |field|
     context "withouth #{field}" do
       let(field) { nil }
       it { should be_invalid }

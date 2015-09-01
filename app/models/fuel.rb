@@ -1,5 +1,5 @@
 class Fuel < ActiveRecord::Base
-  belongs_to :car
+  has_many :cars
 
   validates :name, presence: true
 end

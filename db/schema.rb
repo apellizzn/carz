@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150827140210) do
+ActiveRecord::Schema.define(version: 20150901072734) do
 
   create_table "brands", force: true do |t|
     t.string   "name"
@@ -33,18 +33,16 @@ ActiveRecord::Schema.define(version: 20150827140210) do
     t.float    "latitude"
     t.float    "longitude"
     t.string   "full_address"
+    t.integer  "fuel_id"
   end
 
   add_index "cars", ["brand_id"], name: "index_cars_on_brand_id"
 
   create_table "fuels", force: true do |t|
     t.string   "name"
-    t.integer  "car_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
-  add_index "fuels", ["car_id"], name: "index_fuels_on_car_id"
 
   create_table "photos", force: true do |t|
     t.string   "image_file_name"

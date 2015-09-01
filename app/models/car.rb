@@ -1,6 +1,6 @@
 class Car < ActiveRecord::Base
   belongs_to :brand
-  has_one :fuel
+  belongs_to :fuel
   has_many :photos
 
   validates :full_address, presence: true
@@ -8,6 +8,7 @@ class Car < ActiveRecord::Base
   validates :km, presence: true
   validates :power, presence: true
   validates :brand_id, presence: true
+  validates :fuel_id, presence: true
   validates :color, presence: true
   validates :year, presence: true
 

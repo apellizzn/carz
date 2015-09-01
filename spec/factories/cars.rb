@@ -10,6 +10,7 @@ FactoryGirl.define do
     name "MyString"
     notes "MyText"
     association :brand
+    association :fuel
     full_address nil
   end
 end
