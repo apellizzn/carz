@@ -20,6 +20,7 @@ RSpec.configure do |config|
   end
 
   config.after(:each) do
+    FileUtils.rm_rf(Rails.root + 'public/system')
     DatabaseCleaner.clean
   end
 

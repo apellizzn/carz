@@ -19,7 +19,7 @@ describe Car do
   let(:longitude) { 23.88913 }
   let(:price)     { nil }
 
-  it { expect(car).to be_valid }
+  it { should be_valid }
 
   [:name, :color, :km, :power, :year, :latitude, :longitude, :brand, :fuel].each do |field|
     context "withouth #{field}" do
