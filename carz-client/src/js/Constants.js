@@ -9,6 +9,10 @@ export default {
     TASK_ADDED: null
   }),
 
+  API: {
+    CARS: 'http://localhost:3000/cars'
+  },
+
   ActionSources: keyMirror({
     SERVER_ACTION: null,
     VIEW_ACTION: null
