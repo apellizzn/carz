@@ -1,29 +1,29 @@
 import React from 'react';
-import TodoStore from '../stores/TodoStore';
+import CarStore from '../stores/CarStore';
 import ActionCreator from '../actions/TodoActionCreators';
 import App from './App.jsx';
 
 export default React.createClass({
 
   getInitialState() {
-    return TodoStore.getAll();
+    return CarStore.getAll();
   },
 
   componentDidMount() {
-    TodoStore.addChangeListener(this._onChange);
+    CarStore.addChangeListener(this._onChange);
   },
 
   componentWillUnmount() {
-    TodoStore.removeChangeListener(this._onChange);
+    CarStore.removeChangeListener(this._onChange);
   },
 
   render() {
-    let {tasks} = this.state;
+    let {cars} = this.state;
     return (
       <App
         onAddTask={this.handleAddTask}
         onClear={this.handleClear}
-        tasks={tasks} />
+        cars={cars} />
     );
   },
 
@@ -39,6 +39,6 @@ export default React.createClass({
   },
 
   _onChange() {
-    this.setState(TodoStore.getAll());
+    this.setState(CarStore.getAll());
   }
 });

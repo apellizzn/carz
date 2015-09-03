@@ -12,7 +12,10 @@ export default {
 
   loadCars() {
     Ajax.get(Constants.API.CARS, data => {
-      console.info(data);
+      Dispatcher.handleViewAction({
+        type: Constants.ActionTypes.CARS_FETCHED,
+        cars: data
+      })
     });
   },
 

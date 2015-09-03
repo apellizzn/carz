@@ -5,18 +5,24 @@ import {Checkbox} from 'material-ui';
 export default React.createClass({
   getDefaultProps() {
     return {
-      task: {
-        title: '',
-        completed: false
+      car: {
+        name: '',
+        km: 0,
+        color: 'transparent',
+        power: 0,
+        pirce: 0,
+        year: 2000
       }
     };
   },
 
   render() {
-    let {task} = this.props;
+    let {car} = this.props;
     return (
-      <Checkbox name="checkboxName" ref="checkbox" checked={task.completed}
-        onCheck={this.handleToggle.bind(this, task)} value="on" label={task.title} />
+      <div style={{ backgroundColor: car.color }}>
+        <h1>{car.name}</h1>
+        <label>KM : </label><span>{ car.km }</span>
+      </div>
     );
   },
 

@@ -1,19 +1,19 @@
 import React, {PropTypes} from 'react';
-import TaskList from './TaskList.jsx';
+import CarList from './CarList.jsx';
 import {RaisedButton, Styles} from 'material-ui';
 
 const ThemeManager = new Styles.ThemeManager();
 
 export default React.createClass({
   propTypes: {
-    tasks: PropTypes.array.isRequired,
+    cars: PropTypes.array.isRequired,
     onAddTask: PropTypes.func.isRequired,
     onClear: PropTypes.func.isRequired
   },
 
   getDefaultProps() {
     return {
-      tasks: []
+      cars: []
     };
   },
 
@@ -25,7 +25,7 @@ export default React.createClass({
   },
 
   render() {
-    let {onAddTask, onClear, tasks} = this.props;
+    let {onAddTask, onClear, cars} = this.props;
     return (
       <div className="example-page">
         <h1>Learning Flux</h1>
@@ -34,7 +34,7 @@ export default React.createClass({
           Most features are left unimplemented with clues to guide you on the learning process.
         </p>
 
-        <TaskList tasks={tasks} />
+        <CarList cars={cars} />
 
         <RaisedButton label="Add Task" primary={true} onClick={onAddTask} />
         <RaisedButton label="Clear List" secondary={true} onClick={onClear} />
