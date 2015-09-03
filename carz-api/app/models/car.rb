@@ -47,4 +47,8 @@ class Car < ActiveRecord::Base
   scope :produced_by, -> (name) {
     name ? where(brands: { name: name }) : Car.all
   }
+
+  def as_json options={}
+    super(include: { brand: { only: [:name] } })
+  end
 end
