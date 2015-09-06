@@ -6,16 +6,26 @@
 .example-page {
   margin: auto;
   padding: 50px;
-  width: 60%;
+  width: 80%;
   text-align: center;
 }
 
-#car-list {
-  width: 70%;
-  margin: 20px auto;
+#car-filters{
+  width: 30%;
   text-align: left;
+  float: left;
+  padding: 30px;
 
+}
+#car-list {
+  margin-left: 20px;
+  float: left;
+  display: table;
   label {
     display: block;
+  }
+
+  .card{
+    margin-bottom: 10px;
   }
 }

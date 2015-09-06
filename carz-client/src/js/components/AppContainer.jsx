@@ -1,6 +1,5 @@
 import React from 'react';
 import CarStore from '../stores/CarStore';
-import ActionCreator from '../actions/TodoActionCreators';
 import App from './App.jsx';
 
 export default React.createClass({
@@ -18,24 +17,12 @@ export default React.createClass({
   },
 
   render() {
-    let {cars} = this.state;
+    let {cars, brands} = this.state;
     return (
       <App
-        onAddTask={this.handleAddTask}
-        onClear={this.handleClear}
-        cars={cars} />
+        cars={cars}
+        brands={brands} />
     );
-  },
-
-  handleAddTask() {
-    let title = prompt('Enter task title:');
-    if (title) {
-      ActionCreator.addItem(title);
-    }
-  },
-
-  handleClear() {
-    ActionCreator.clearList();
   },
 
   _onChange() {

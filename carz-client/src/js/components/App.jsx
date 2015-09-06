@@ -1,6 +1,7 @@
 import React, {PropTypes} from 'react';
 import CarList from './CarList.jsx';
-import {RaisedButton, Styles} from 'material-ui';
+import CarFilters from './CarFilters.jsx';
+import {Styles} from 'material-ui';
 
 const ThemeManager = new Styles.ThemeManager();
 
@@ -13,7 +14,8 @@ export default React.createClass({
 
   getDefaultProps() {
     return {
-      cars: []
+      cars: [],
+      brands: []
     };
   },
 
@@ -25,19 +27,16 @@ export default React.createClass({
   },
 
   render() {
-    let {onAddTask, onClear, cars} = this.props;
+    let {brands, cars} = this.props;
     return (
       <div className="example-page">
-        <h1>Learning Flux</h1>
+        <h1>Car shop Online</h1>
         <p>
           Below is a list of tasks you can implement to better grasp the patterns behind Flux.<br />
           Most features are left unimplemented with clues to guide you on the learning process.
         </p>
-
+        <CarFilters brands={brands}/>
         <CarList cars={cars} />
-
-        <RaisedButton label="Add Task" primary={true} onClick={onAddTask} />
-        <RaisedButton label="Clear List" secondary={true} onClick={onClear} />
       </div>
     );
   },

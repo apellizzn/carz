@@ -1,6 +1,6 @@
 import React from 'react';
 import ActionCreator from '../actions/TodoActionCreators';
-import {Card, CardMedia, CardTitle, CardText, CardActions, FlatButton} from 'material-ui';
+import {Card, CardMedia, CardTitle} from 'material-ui';
 
 
 export default React.createClass({
@@ -20,16 +20,10 @@ export default React.createClass({
   render() {
     let {car} = this.props;
     return (
-      <Card>
+      <Card className="card">
         <CardMedia overlay={<CardTitle title={car.name} subtitle={car.brand.name} />}>
           <img src="http://lorempixel.com/600/337/nature/"/>
         </CardMedia>
-        <CardText>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-          Donec mattis pretium massa. Aliquam erat volutpat. Nulla facilisi.
-          Donec vulputate interdum sollicitudin. Nunc lacinia auctor quam sed pellentesque.
-          Aliquam dui mauris, mattis quis lacus id, pellentesque lobortis odio.
-        </CardText>
       </Card>
     );
   },

@@ -3,16 +3,18 @@ import Constants from '../Constants';
 import Ajax from 'jquery';
 
 export default {
-  addItem(text) {
-    Dispatcher.handleViewAction({
-      type: Constants.ActionTypes.TASK_ADDED,
-      text: text
+  loadBrands() {
+    Ajax.get(Constants.API.BRANDS, data => {
+      Dispatcher.handleServerAction({
+        type: Constants.ActionTypes.BRANDS_FETCHED,
+        brands: data
+      })
     });
   },
 
   loadCars() {
     Ajax.get(Constants.API.CARS, data => {
-      Dispatcher.handleViewAction({
+      Dispatcher.handleServerAction({
         type: Constants.ActionTypes.CARS_FETCHED,
         cars: data
       })
