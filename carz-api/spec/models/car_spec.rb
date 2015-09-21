@@ -42,7 +42,7 @@ describe Car do
 
     context 'with brand' do
       it 'returns the right cars' do
-        expect(Car.produced_by('Audi').count).to be 1
+        expect(Car.produced_by([other_brand.id]).count).to be 1
       end
     end
   end

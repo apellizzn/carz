@@ -1,47 +1,98 @@
 import React from 'react';
-import {Slider, Paper, List, ListItem, Checkbox} from 'material-ui';
+import ReactSlider  from 'react-slider';
+import ActionCreator from '../actions/TodoActionCreators';
+import {Paper, FlatButton, List, ListItem, Checkbox} from 'material-ui';
 
 export default React.createClass({
   getDefaultProps() {
     return {
       brands: [],
-      maxPrice: 1
+      fuels: [],
+      maxPrice: 10000,
+      minPrice: 0,
+      maxKm: 100000,
+      minKm: 0
     };
   },
 
   getInitialState() {
     return {
-      maxPrice: 1,
-      maxKm: 1
+      cMaxPrice: this.props.maxPrice,
+      cMinPrice: this.props.minPrice,
+      cMinKm: this.props.minKm,
+      cMaxKm: this.props.maxKm,
+      brandIds: []
     };
   },
 
-  onPriceChange(e, value) {
-    this.setState({ maxPrice: value});
+  onToggleBrand(e, checked) {
+    let { brandIds } = this.state;
+    if (checked) { brandIds.push(e.target.value); }
+    else {
+      const index = brandIds.indexOf(e.target.value);
+      brandIds.splice(index, 1);
+    }
+    this.setState({ brandIds: brandIds });
   },
 
-  onKmChange(e, value) {
-    this.setState({ maxKm: value});
+  onPriceChange(range) {
+    this.setState({ cMinPrice: range[0], cMaxPrice: range[1] });
+  },
+
+  onKmChange(range) {
+    this.setState({ cMinKm: range[0], cMaxKm: range[1] });
   },
 
   render() {
-    let {brands} = this.props;
-    let {maxPrice, maxKm} = this.state;
+    let {brands, fuels, maxPrice, minPrice, minKm, maxKm} = this.props;
+    let {cMinPrice, cMaxPrice, cMinKm, cMaxKm} = this.state;
     return (
       <Paper id="car-filters" zDepth="2">
-        <Slider name="price" onChange={this.onPriceChange} defaultValue={maxPrice} min={0} step={0.1} max={1} description={'Price up to ' + maxPrice * 10000 + ' € '}/>
-        <Slider name="km" onChange={this.onKmChange} defaultValue={maxKm} min={0} step={0.1} max={1} description={'Km up to ' + maxKm * 100000}/>
-        <Slider name="year" defaultValue={0.5} step={0.10} description="Year"/>
+        <label>Price</label>
+        <ReactSlider onChange={this.onPriceChange} className="horizontal-slider" withBars step={1000} min={minPrice} max={maxPrice}>
+          <div className="min">{cMinPrice}</div>
+          <div className="max">{cMaxPrice}</div>
+        </ReactSlider>
+        <label>Km</label>
+        <ReactSlider onChange={this.onKmChange} className="horizontal-slider" withBars step={1000} min={minKm} max={maxKm}>
+          <div className="min">{cMinKm}</div>
+          <div className="max">{cMaxKm}</div>
+        </ReactSlider>
         <label>Brands</label>
           <List>
             {brands.map(brand =>
               <ListItem
-                leftCheckbox={<Checkbox name="brand" value={brand.id}/>}
+                leftCheckbox={<Checkbox name="brand" refs={'brand' + brand.id} onCheck={this.onToggleBrand} value={brand.id}/>}
                 primaryText={brand.name}
               />
             )}
           </List>
+        <label>Fuels</label>
+          <List>
+            {fuels.map(fuel =>
+              <ListItem
+                leftCheckbox={<Checkbox name="fuel" value={fuel.id}/>}
+                primaryText={fuel.name}
+              />
+            )}
+          </List>
+      <FlatButton label="Apply" secondary={true} onClick={this.applyFilters}/>
       </Paper>
     );
+  },
+
+  applyFilters() {
+    ActionCreator.loadCars(this._getFilters());
+  },
+
+  _getFilters() {
+    return {
+      min_price: this.state.cMinPrice,
+      max_price: this.state.cMaxPrice,
+      min_km: this.state.cMinKm,
+      max_km: this.state.cMaxKm,
+      brand_ids: this.state.brandIds
+    };
   }
+
 });

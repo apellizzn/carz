@@ -17,11 +17,9 @@ export default React.createClass({
   },
 
   render() {
-    let {cars, brands} = this.state;
+    let {cars, brands, fuels} = this.state;
     return (
-      <App
-        cars={cars}
-        brands={brands} />
+      <App cars={cars} brands={brands} fuels={fuels} />
     );
   },
 

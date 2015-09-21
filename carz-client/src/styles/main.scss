@@ -16,7 +16,54 @@
   float: left;
   padding: 30px;
 
+  .horizontal-slider {
+    width: 90%;
+    margin-bottom: 10px;
+    max-width: 450px;
+    height: 50px;
+  }
+
+  .handle {
+    font-size: 0.9em;
+    text-align: center;
+    background-color: black;
+    color: white;
+    cursor: pointer;
+  }
+  .handle.active {
+    background-color: #00bcd4;
+  }
+  .bar {
+    position: relative;
+    background: black;
+  }
+  .bar.bar-1 {
+      background: #00bcd4;
+  }
+  .bar.bar-2 {
+      background: black;
+  }
+  .horizontal-slider .bar {
+      top: 20px;
+      height: 10px;
+  }
+  .horizontal-slider .handle {
+      top: 1px;
+      width: 1px;
+      height: 48px;
+      color: black;
+      line-height: 20px;
+  }
+  .handle-0, .handle-1 {
+    div {
+      margin-left: 10px;
+    }
+  }
+  #horizontal-2 .bar.bar-2 {
+      background: #ddd;
+  }
 }
+
 #car-list {
   margin-left: 20px;
   float: left;

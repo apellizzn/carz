@@ -44,8 +44,8 @@ class Car < ActiveRecord::Base
 
   scope :of_color, -> (color) { color ? where(color: color) : Car.all }
 
-  scope :produced_by, -> (name) {
-    name ? where(brands: { name: name }) : Car.all
+  scope :produced_by, -> (brand_ids) {
+    brand_ids && !brand_ids.empty? ? where(brands: { id: brand_ids }) : Car.all
   }
 
   def as_json options={}

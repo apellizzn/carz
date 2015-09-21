@@ -8,14 +8,15 @@ const ThemeManager = new Styles.ThemeManager();
 export default React.createClass({
   propTypes: {
     cars: PropTypes.array.isRequired,
-    onAddTask: PropTypes.func.isRequired,
-    onClear: PropTypes.func.isRequired
+    brands: PropTypes.array.isRequired,
+    fuels: PropTypes.array.isRequired
   },
 
   getDefaultProps() {
     return {
       cars: [],
-      brands: []
+      brands: [],
+      fuels: []
     };
   },
 
@@ -27,7 +28,7 @@ export default React.createClass({
   },
 
   render() {
-    let {brands, cars} = this.props;
+    let {brands, cars, fuels} = this.props;
     return (
       <div className="example-page">
         <h1>Car shop Online</h1>
@@ -35,7 +36,7 @@ export default React.createClass({
           Below is a list of tasks you can implement to better grasp the patterns behind Flux.<br />
           Most features are left unimplemented with clues to guide you on the learning process.
         </p>
-        <CarFilters brands={brands}/>
+        <CarFilters brands={brands} fuels={fuels}/>
         <CarList cars={cars} />
       </div>
     );

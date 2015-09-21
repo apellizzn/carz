@@ -7,12 +7,14 @@ export default {
   // Each time you add an action, add it here... They should be past-tense
   ActionTypes: keyMirror({
     CARS_FETCHED: 'cars-fetch',
-    BRANDS_FETCHED: 'brands-fetch'
+    BRANDS_FETCHED: 'brands-fetch',
+    FUELS_FETCHED: 'fuels-fetch'
   }),
 
   API: {
     CARS: 'http://localhost:3000/cars',
-    BRANDS: 'http://localhost:3000/brands'
+    BRANDS: 'http://localhost:3000/brands',
+    FUELS: 'http://localhost:3000/fuels'
   },
 
   ActionSources: keyMirror({
