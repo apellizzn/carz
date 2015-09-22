@@ -10,11 +10,26 @@
   text-align: center;
 }
 
-#car-filters{
+#car-filters {
   width: 30%;
   text-align: left;
   float: left;
   padding: 30px;
+
+  .colors-mosaic {
+    width: 100%;
+    text-align: center;
+    height: auto;
+    float: left;
+    padding: 5px;
+
+    .color-cell {
+      float: left;
+      width: 50px;
+      height: 50px;
+    }
+
+  }
 
   .horizontal-slider {
     width: 90%;

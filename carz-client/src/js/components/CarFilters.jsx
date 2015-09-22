@@ -44,6 +44,7 @@ export default React.createClass({
   },
 
   render() {
+    let colors = ["red","yellow", "green", "brown", "violet", "pink"];
     let {brands, fuels, maxPrice, minPrice, minKm, maxKm} = this.props;
     let {cMinPrice, cMaxPrice, cMinKm, cMaxKm} = this.state;
     return (
@@ -76,7 +77,13 @@ export default React.createClass({
               />
             )}
           </List>
-      <FlatButton label="Apply" secondary={true} onClick={this.applyFilters}/>
+          <label>Color</label>
+          <div className="colors-mosaic">
+          {
+            colors.map(color => <Paper circle={true} className="color-cell" style={ { backgroundColor: color } }/>)
+          }
+          </div>
+          <FlatButton label="Apply" style={{ 'float': 'left'}} secondary={true} onClick={this.applyFilters}/>
       </Paper>
     );
   },
