@@ -24,6 +24,7 @@ export default React.createClass({
       cMinKm: this.props.minKm,
       cMaxKm: this.props.maxKm,
       brandIds: [],
+      fuelIds: [],
       cColors: []
     };
   },
@@ -38,6 +39,12 @@ export default React.createClass({
     let { brandIds } = this.state;
     checked ? brandIds.push(e.target.value) : _.pull(brandIds, e.target.value);
     this.setState({ brandIds: brandIds });
+  },
+
+  onToggleFuel(e, checked) {
+    let { fuelIds } = this.state;
+    checked ? fuelIds.push(e.target.value) : _.pull(fuelIds, e.target.value);
+    this.setState({ fuelIds: fuelIds });
   },
 
   onPriceChange(range) {
@@ -67,7 +74,7 @@ export default React.createClass({
           <List>
             {brands.map(brand =>
               <ListItem
-                leftCheckbox={<Checkbox name="brand" refs={'brand' + brand.id} onCheck={this.onToggleBrand} value={brand.id}/>}
+                leftCheckbox={<Checkbox name="brand" onCheck={this.onToggleBrand} value={brand.id}/>}
                 primaryText={brand.name}
               />
             )}
@@ -76,7 +83,7 @@ export default React.createClass({
           <List>
             {fuels.map(fuel =>
               <ListItem
-                leftCheckbox={<Checkbox name="fuel" value={fuel.id}/>}
+                leftCheckbox={<Checkbox name="fuel" onCheck={this.onToggleFuel}  value={fuel.id}/>}
                 primaryText={fuel.name}
               />
             )}
@@ -109,7 +116,8 @@ export default React.createClass({
       min_km: this.state.cMinKm,
       max_km: this.state.cMaxKm,
       brand_ids: this.state.brandIds,
-      colors: this.state.colors
+      fuel_ids: this.state.fuelIds,
+      colors: this.state.cColors
     };
   }
 });
