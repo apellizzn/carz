@@ -4,7 +4,7 @@ class CarsController < ApplicationController
       .from_km(params[:min_km]).to_km(params[:max_km])
       .from_power(params[:min_power]).to_power(params[:max_power])
       .from_year(params[:min_year]).to_year(params[:max_year])
-      .of_color(params[:color]).produced_by(params[:brand_ids])
+      .of_colors(params[:colors]).produced_by(params[:brand_ids])
       .paginate(pagination)
   end
 

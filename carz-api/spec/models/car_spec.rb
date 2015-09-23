@@ -47,19 +47,19 @@ describe Car do
     end
   end
 
-  describe 'color filter' do
+  describe 'colors filter' do
     let!(:other_car) { FactoryGirl.create :car, color: 'Black'}
     before { subject.save! }
 
     context 'with color nil' do
       it 'returns all the cars' do
-        expect(Car.of_color(nil).count).to eq 2
+        expect(Car.of_colors(nil).count).to eq 2
       end
     end
 
     context 'with color' do
       it 'returns the right cars' do
-        expect(Car.of_color('Black').count).to eq 1
+        expect(Car.of_colors(['Black']).count).to eq 1
       end
     end
   end

@@ -42,7 +42,7 @@ class Car < ActiveRecord::Base
   }
   scope :to_year, -> (year) { year ? where(year: 0..(year.to_f)) : Car.all }
 
-  scope :of_color, -> (color) { color ? where(color: color) : Car.all }
+  scope :of_colors, -> (colors) { colors && !colors.empty? ? where(color: colors) : Car.all }
 
   scope :produced_by, -> (brand_ids) {
     brand_ids && !brand_ids.empty? ? where(brands: { id: brand_ids }) : Car.all
