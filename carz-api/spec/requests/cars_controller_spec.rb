@@ -26,7 +26,7 @@ describe CarsController do
     end
   end
 
-  describe "GET #index" do
+  describe 'GET #index' do
 
     it "returns http success" do
       get '/cars'
@@ -71,6 +71,18 @@ describe CarsController do
           end
         end
       end
+    end
+  end
+
+  describe 'GET #colors' do
+    before do
+      2.times { FactoryGirl.create :car, color: 'Red' }
+      FactoryGirl.create :car, color: 'Black'
+    end
+
+    it 'returns each color only 1 time' do
+      get '/cars/colors'
+      expect(content).to eq ['Black', 'Red']
     end
   end
 end

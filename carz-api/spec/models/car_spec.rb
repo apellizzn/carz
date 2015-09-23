@@ -64,6 +64,15 @@ describe Car do
     end
   end
 
+  describe '#available_colors' do
+    let!(:other_car) { FactoryGirl.create :car, color: 'Black' }
+    let!(:red_car)   { FactoryGirl.create :car, color: 'Red'   }
+
+    it 'returns each color 1 time' do
+      expect(Car.available_colors).to eq ['Black','Red']
+    end
+  end
+  
   [:price, :km, :power, :year].each do |field|
     describe "#{field} range filter" do
       let!(:other_car) { FactoryGirl.create :car,  field => 14 }

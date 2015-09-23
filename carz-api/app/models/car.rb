@@ -51,4 +51,8 @@ class Car < ActiveRecord::Base
   def as_json options={}
     super(include: { brand: { only: [:name] } })
   end
+
+  def self.available_colors
+    unscoped.distinct(:color).pluck(:color).sort
+  end
 end

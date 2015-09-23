@@ -1,4 +1,5 @@
 class CarsController < ApplicationController
+
   def index
     render json: Car.from_price(params[:min_price]).to_price(params[:max_price])
       .from_km(params[:min_km]).to_km(params[:max_km])
@@ -6,6 +7,10 @@ class CarsController < ApplicationController
       .from_year(params[:min_year]).to_year(params[:max_year])
       .of_colors(params[:colors]).produced_by(params[:brand_ids])
       .paginate(pagination)
+  end
+
+  def colors
+    render json: Car.available_colors  
   end
 
   def create
