@@ -13,6 +13,15 @@ export default {
     return object;
   },
 
+  loadColors() {
+    Ajax.get(Constants.API.COLORS, data => {
+      Dispatcher.handleServerAction({
+        type: Constants.ActionTypes.COLORS_FETCHED,
+        colors: data
+      });
+    });
+  },
+
   loadBrands() {
     Ajax.get(Constants.API.BRANDS, data => {
       Dispatcher.handleServerAction({

@@ -8,13 +8,15 @@ export default {
   ActionTypes: keyMirror({
     CARS_FETCHED: 'cars-fetch',
     BRANDS_FETCHED: 'brands-fetch',
-    FUELS_FETCHED: 'fuels-fetch'
+    FUELS_FETCHED: 'fuels-fetch',
+    COLORS_FETCHED: 'colors-fetch'
   }),
 
   API: {
     CARS: 'http://localhost:3000/cars',
     BRANDS: 'http://localhost:3000/brands',
-    FUELS: 'http://localhost:3000/fuels'
+    FUELS: 'http://localhost:3000/fuels',
+    COLORS: 'http://localhost:3000/cars/colors'
   },
 
   ActionSources: keyMirror({

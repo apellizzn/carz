@@ -4,10 +4,14 @@ import BaseStore from './BaseStore';
 import assign from 'object-assign';
 
 // data storage
-let _data = { cars: [], brands: [], fuels: [] };
+let _data = { cars: [], brands: [], fuels: [], colors: [] };
 
 function loadCars(cars) {
   _data.cars = cars;
+}
+
+function loadColors(colors) {
+  _data.colors = colors;
 }
 
 function loadFules(fuels) {
@@ -28,6 +32,11 @@ const CarStore = assign({}, BaseStore, {
   dispatcherIndex: Dispatcher.register((payload) => {
     let action = payload.action;
     switch (action.type) {
+    case Constants.ActionTypes.COLORS_FETCHED:
+      const colors = action.colors;
+      loadColors(colors);
+      CarStore.emitChange();
+      break;
     case Constants.ActionTypes.FUELS_FETCHED:
       const fuels = action.fuels;
       loadFules(fuels);

@@ -6,3 +6,4 @@ React.render(<AppContainer />, document.getElementById('main'));
 ActionCreator.loadBrands();
 ActionCreator.loadCars();
 ActionCreator.loadFuels();
+ActionCreator.loadColors();

@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactSlider  from 'react-slider';
 import ActionCreator from '../actions/TodoActionCreators';
+import _ from 'lodash';
 import {Paper, FlatButton, List, ListItem, Checkbox} from 'material-ui';
 
 export default React.createClass({
@@ -8,6 +9,7 @@ export default React.createClass({
     return {
       brands: [],
       fuels: [],
+      colors: [],
       maxPrice: 10000,
       minPrice: 0,
       maxKm: 100000,
@@ -21,22 +23,20 @@ export default React.createClass({
       cMinPrice: this.props.minPrice,
       cMinKm: this.props.minKm,
       cMaxKm: this.props.maxKm,
-      brandIds: []
+      brandIds: [],
+      cColors: []
     };
   },
 
   onColorPick(color) {
-    this.setState({ color: color});
+    let { cColors } = this.state;
+    _.includes(cColors, color) ? _.pull(cColors, color) : cColors.push(color);
+    this.setState({ cColors: cColors });
   },
 
   onToggleBrand(e, checked) {
     let { brandIds } = this.state;
-    if (checked) {
-      brandIds.push(e.target.value);
-    } else {
-      const index = brandIds.indexOf(e.target.value);
-      brandIds.splice(index, 1);
-    }
+    checked ? brandIds.push(e.target.value) : _.pull(brandIds, e.target.value);
     this.setState({ brandIds: brandIds });
   },
 
@@ -49,9 +49,8 @@ export default React.createClass({
   },
 
   render() {
-    let colors = ["red", "yellow", "green", "brown", "violet", "pink"];
-    let {brands, fuels, maxPrice, minPrice, minKm, maxKm} = this.props;
-    let {cMinPrice, cMaxPrice, cMinKm, cMaxKm} = this.state;
+    let {brands, colors, fuels, maxPrice, minPrice, minKm, maxKm} = this.props;
+    let {cMinPrice, cMaxPrice, cMinKm, cMaxKm, cColors} = this.state;
     return (
       <Paper id="car-filters" zDepth="2">
         <label>Price</label>
@@ -90,7 +89,7 @@ export default React.createClass({
                   key={'color#' + color}
                   onClick={this.onColorPick.bind(this, color)}
                   circle={true}
-                  className={ 'color-cell ' + (this.state.color === color ? 'selected' : '') }
+                  className={ 'color-cell ' + (_.includes(cColors, color) ? 'selected' : '') }
                   style={ { backgroundColor: color } }/>)
           }
           </div>
@@ -110,7 +109,7 @@ export default React.createClass({
       min_km: this.state.cMinKm,
       max_km: this.state.cMaxKm,
       brand_ids: this.state.brandIds,
-      color: this.state.color
+      colors: this.state.colors
     };
   }
 });
