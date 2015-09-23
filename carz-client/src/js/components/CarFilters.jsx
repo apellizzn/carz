@@ -25,10 +25,15 @@ export default React.createClass({
     };
   },
 
+  onColorPick(color) {
+    this.setState({ color: color});
+  },
+
   onToggleBrand(e, checked) {
     let { brandIds } = this.state;
-    if (checked) { brandIds.push(e.target.value); }
-    else {
+    if (checked) {
+      brandIds.push(e.target.value);
+    } else {
       const index = brandIds.indexOf(e.target.value);
       brandIds.splice(index, 1);
     }
@@ -44,7 +49,7 @@ export default React.createClass({
   },
 
   render() {
-    let colors = ["red","yellow", "green", "brown", "violet", "pink"];
+    let colors = ["red", "yellow", "green", "brown", "violet", "pink"];
     let {brands, fuels, maxPrice, minPrice, minKm, maxKm} = this.props;
     let {cMinPrice, cMaxPrice, cMinKm, cMaxKm} = this.state;
     return (
@@ -80,7 +85,13 @@ export default React.createClass({
           <label>Color</label>
           <div className="colors-mosaic">
           {
-            colors.map(color => <Paper circle={true} className="color-cell" style={ { backgroundColor: color } }/>)
+            colors.map(color =>
+                <Paper
+                  key={'color#' + color}
+                  onClick={this.onColorPick.bind(this, color)}
+                  circle={true}
+                  className={ 'color-cell ' + (this.state.color === color ? 'selected' : '') }
+                  style={ { backgroundColor: color } }/>)
           }
           </div>
           <FlatButton label="Apply" style={{ 'float': 'left'}} secondary={true} onClick={this.applyFilters}/>
@@ -98,8 +109,8 @@ export default React.createClass({
       max_price: this.state.cMaxPrice,
       min_km: this.state.cMinKm,
       max_km: this.state.cMaxKm,
-      brand_ids: this.state.brandIds
+      brand_ids: this.state.brandIds,
+      color: this.state.color
     };
   }
-
 });
