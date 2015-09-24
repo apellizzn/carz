@@ -2,7 +2,8 @@ import React from 'react';
 import ReactSlider  from 'react-slider';
 import ActionCreator from '../actions/TodoActionCreators';
 import _ from 'lodash';
-import {Paper, FlatButton, List, ListItem, Checkbox} from 'material-ui';
+import CollapsedFilter from './CollapsedFilter.jsx';
+import {Paper, FlatButton} from 'material-ui';
 
 export default React.createClass({
   getDefaultProps() {
@@ -60,47 +61,36 @@ export default React.createClass({
     let {cMinPrice, cMaxPrice, cMinKm, cMaxKm, cColors} = this.state;
     return (
       <Paper id="car-filters" zDepth="2">
-        <label>Price</label>
+        <h3>Price</h3>
         <ReactSlider onChange={this.onPriceChange} className="horizontal-slider" withBars step={1000} min={minPrice} max={maxPrice}>
           <div className="min">{cMinPrice}</div>
           <div className="max">{cMaxPrice}</div>
         </ReactSlider>
-        <label>Km</label>
+        <h3>Km</h3>
         <ReactSlider onChange={this.onKmChange} className="horizontal-slider" withBars step={1000} min={minKm} max={maxKm}>
           <div className="min">{cMinKm}</div>
           <div className="max">{cMaxKm}</div>
         </ReactSlider>
-        <label>Brands</label>
-          <List>
-            {brands.map(brand =>
-              <ListItem
-                leftCheckbox={<Checkbox name="brand" onCheck={this.onToggleBrand} value={brand.id}/>}
-                primaryText={brand.name}
-              />
-            )}
-          </List>
-        <label>Fuels</label>
-          <List>
-            {fuels.map(fuel =>
-              <ListItem
-                leftCheckbox={<Checkbox name="fuel" onCheck={this.onToggleFuel}  value={fuel.id}/>}
-                primaryText={fuel.name}
-              />
-            )}
-          </List>
-          <label>Color</label>
-          <div className="colors-mosaic">
-          {
-            colors.map(color =>
-                <Paper
-                  key={'color#' + color}
-                  onClick={this.onColorPick.bind(this, color)}
-                  circle={true}
-                  className={ 'color-cell ' + (_.includes(cColors, color) ? 'selected' : '') }
-                  style={ { backgroundColor: color } }/>)
-          }
-          </div>
-          <FlatButton label="Apply" style={{ 'float': 'left'}} secondary={true} onClick={this.applyFilters}/>
+        <hr/>
+        <CollapsedFilter title="Brands" source={brands} onToggle={this.onToggleBrand}/>
+        <hr/>
+        <CollapsedFilter title="Fuels" source={fuels} onToggle={this.onToggleFuel}/>
+        <hr/>
+        <h3>Color</h3>
+        <div className="colors-mosaic">
+        {
+          colors.map(color =>
+              <Paper
+                key={'color#' + color}
+                onClick={this.onColorPick.bind(this, color)}
+                circle={true}
+                className={ 'color-cell ' + (_.includes(cColors, color) ? 'selected' : '') }
+                style={ { backgroundColor: color } }/>)
+        }
+        </div>
+        <hr style={{ clear: 'both'}}/>
+        <FlatButton label="Apply" style={{ 'float': 'left'}} secondary={true} onClick={this.applyFilters}/>
+        <FlatButton label="Clear" style={{ 'float': 'right'}} secondary={true} onClick={this.applyFilters}/>
       </Paper>
     );
   },
