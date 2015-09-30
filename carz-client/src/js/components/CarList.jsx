@@ -13,7 +13,7 @@ export default React.createClass({
     let {cars} = this.props;
     return (
       <form id="car-list">
-        {cars.map(car => <Car car={car} />)}
+        {cars.map(car => <Car key={car.id} car={car} />)}
       </form>
     );
   }

@@ -21,7 +21,7 @@ export default React.createClass({
     let {car} = this.props;
     return (
       <Card className="card">
-        <CardMedia overlay={<CardTitle title={car.name} subtitle={car.brand.name} />}>
+        <CardMedia overlay={<CardTitle title={car.name} subtitle={car.brand.name + ' ' + car.color} />}>
           <img src="http://lorempixel.com/600/337/nature/"/>
         </CardMedia>
       </Card>

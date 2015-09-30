@@ -1,8 +1,11 @@
 import React, {PropTypes} from 'react';
 import {List, ListItem, Checkbox, FlatButton} from 'material-ui';
+import _ from 'lodash';
+
 export default React.createClass({
 
   propTypes: {
+    applied: PropTypes.array.isRequired,
     source: PropTypes.array.isRequired,
     title: PropTypes.string.isRequired,
     onToggle: PropTypes.func.isRequired
@@ -10,12 +13,12 @@ export default React.createClass({
 
   getInitialState() {
     return {
-      hidden: true
+      hidden: false
     };
   },
 
   render() {
-    let { source, title, onToggle } = this.props;
+    let { applied, source, title, onToggle } = this.props;
     let { hidden } = this.state;
     let displayValue = hidden ? 'none' : 'block';
     return (
@@ -27,7 +30,7 @@ export default React.createClass({
         <List style={{ display: displayValue }}>
           {source.map(el =>
             <ListItem
-              leftCheckbox={<Checkbox name="brand" onCheck={onToggle} value={el.id}/>}
+              leftCheckbox={<Checkbox checked={ _.includes(applied, el.id) }name="brand" onCheck={onToggle} value={el.id}/>}
               primaryText={el.name}
             />
           )}

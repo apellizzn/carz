@@ -1,6 +1,7 @@
 class CarsController < ApplicationController
 
   def index
+    pp params[:brand_ids]
     render json: Car.from_price(params[:min_price]).to_price(params[:max_price])
       .from_km(params[:min_km]).to_km(params[:max_km])
       .from_power(params[:min_power]).to_power(params[:max_power])
@@ -10,7 +11,7 @@ class CarsController < ApplicationController
   end
 
   def colors
-    render json: Car.available_colors  
+    render json: Car.available_colors
   end
 
   def create

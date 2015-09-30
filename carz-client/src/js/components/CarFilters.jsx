@@ -33,32 +33,32 @@ export default React.createClass({
   onColorPick(color) {
     let { cColors } = this.state;
     _.includes(cColors, color) ? _.pull(cColors, color) : cColors.push(color);
-    this.setState({ cColors: cColors });
+    this.setState({ cColors: cColors }, this.fetchCars);
   },
 
   onToggleBrand(e, checked) {
     let { brandIds } = this.state;
-    checked ? brandIds.push(e.target.value) : _.pull(brandIds, e.target.value);
-    this.setState({ brandIds: brandIds });
+    checked ? brandIds.push(Number(e.target.value)) : _.pull(brandIds, Number(e.target.value));
+    this.setState({ brandIds: brandIds }, this.fetchCars);
   },
 
   onToggleFuel(e, checked) {
     let { fuelIds } = this.state;
-    checked ? fuelIds.push(e.target.value) : _.pull(fuelIds, e.target.value);
-    this.setState({ fuelIds: fuelIds });
+    checked ? fuelIds.push(Number(e.target.value)) : _.pull(fuelIds, Number(e.target.value));
+    this.setState({ fuelIds: fuelIds }, this.fetchCars);
   },
 
   onPriceChange(range) {
-    this.setState({ cMinPrice: range[0], cMaxPrice: range[1] });
+    this.setState({ cMinPrice: range[0], cMaxPrice: range[1] }, this.fetchCars);
   },
 
   onKmChange(range) {
-    this.setState({ cMinKm: range[0], cMaxKm: range[1] });
+    this.setState({ cMinKm: range[0], cMaxKm: range[1] }, this.fetchCars);
   },
 
   render() {
     let {brands, colors, fuels, maxPrice, minPrice, minKm, maxKm} = this.props;
-    let {cMinPrice, cMaxPrice, cMinKm, cMaxKm, cColors} = this.state;
+    let {brandIds, fuelIds, cMinPrice, cMaxPrice, cMinKm, cMaxKm, cColors} = this.state;
     return (
       <Paper id="car-filters" zDepth="2">
         <h3>Price</h3>
@@ -72,9 +72,9 @@ export default React.createClass({
           <div className="max">{cMaxKm}</div>
         </ReactSlider>
         <hr/>
-        <CollapsedFilter title="Brands" source={brands} onToggle={this.onToggleBrand}/>
+        <CollapsedFilter title="Brands" applied={brandIds} source={brands} onToggle={this.onToggleBrand}/>
         <hr/>
-        <CollapsedFilter title="Fuels" source={fuels} onToggle={this.onToggleFuel}/>
+        <CollapsedFilter title="Fuels" applied={fuelIds} source={fuels} onToggle={this.onToggleFuel}/>
         <hr/>
         <h3>Color</h3>
         <div className="colors-mosaic">
@@ -89,13 +89,16 @@ export default React.createClass({
         }
         </div>
         <hr style={{ clear: 'both'}}/>
-        <FlatButton label="Apply" style={{ 'float': 'left'}} secondary={true} onClick={this.applyFilters}/>
-        <FlatButton label="Clear" style={{ 'float': 'right'}} secondary={true} onClick={this.applyFilters}/>
+        <FlatButton label="Clear" style={{ 'float': 'left'}} secondary={true} onClick={this.resetFilters}/>
       </Paper>
     );
   },
 
-  applyFilters() {
+  resetFilters() {
+    this.setState(this.getInitialState(), this.fetchCars);
+  },
+
+  fetchCars() {
     ActionCreator.loadCars(this._getFilters());
   },
 
