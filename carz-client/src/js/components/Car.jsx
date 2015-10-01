@@ -1,29 +1,22 @@
-import React from 'react';
+import React, {PropTypes} from 'react';
 import ActionCreator from '../actions/TodoActionCreators';
-import {Card, CardMedia, CardTitle} from 'material-ui';
-
+import {Card, CardMedia, CardTitle, CardActions, FlatButton} from 'material-ui';
 
 export default React.createClass({
-  getDefaultProps() {
-    return {
-      car: {
-        name: '',
-        km: 0,
-        color: 'transparent',
-        power: 0,
-        pirce: 0,
-        year: 2000
-      }
-    };
+  propTypes: {
+    car: PropTypes.object.isRequired
   },
 
   render() {
-    let {car} = this.props;
+    const car = this.props.car;
     return (
       <Card className="card">
         <CardMedia overlay={<CardTitle title={car.name} subtitle={car.brand.name + ' ' + car.color} />}>
           <img src="http://lorempixel.com/600/337/nature/"/>
         </CardMedia>
+        <CardActions>
+          <FlatButton label="Details"/>
+        </CardActions>
       </Card>
     );
   },

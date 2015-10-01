@@ -29,8 +29,8 @@ export default React.createClass({
         </h3>
         <List style={{ display: displayValue }}>
           {source.map(el =>
-            <ListItem
-              leftCheckbox={<Checkbox checked={ _.includes(applied, el.id) }name="brand" onCheck={onToggle} value={el.id}/>}
+            <ListItem key={el.id}
+              leftCheckbox={<Checkbox checked={ _.includes(applied, el.id) }name="brand" onCheck={onToggle} value={el.id + ''}/>}
               primaryText={el.name}
             />
           )}

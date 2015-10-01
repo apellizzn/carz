@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {PropTypes} from 'react';
 import ReactSlider  from 'react-slider';
 import ActionCreator from '../actions/TodoActionCreators';
 import _ from 'lodash';
@@ -6,6 +6,17 @@ import CollapsedFilter from './CollapsedFilter.jsx';
 import {Paper, FlatButton} from 'material-ui';
 
 export default React.createClass({
+
+  propTypes: {
+    brands: PropTypes.array.isRequired,
+    fuels: PropTypes.array.isRequired,
+    colors: PropTypes.array.isRequired,
+    maxPrice: PropTypes.number,
+    minPrice: PropTypes.number,
+    maxKm: PropTypes.number,
+    minKm: PropTypes.number
+  },
+
   getDefaultProps() {
     return {
       brands: [],
@@ -60,14 +71,14 @@ export default React.createClass({
     let {brands, colors, fuels, maxPrice, minPrice, minKm, maxKm} = this.props;
     let {brandIds, fuelIds, cMinPrice, cMaxPrice, cMinKm, cMaxKm, cColors} = this.state;
     return (
-      <Paper id="car-filters" zDepth="2">
+      <Paper id="car-filters" zDepth={2}>
         <h3>Price</h3>
-        <ReactSlider onChange={this.onPriceChange} className="horizontal-slider" withBars step={1000} min={minPrice} max={maxPrice}>
+        <ReactSlider onChange={this.onPriceChange} value={[cMinPrice, cMaxPrice]} className="horizontal-slider" withBars step={1000} min={minPrice} max={maxPrice}>
           <div className="min">{cMinPrice}</div>
           <div className="max">{cMaxPrice}</div>
         </ReactSlider>
         <h3>Km</h3>
-        <ReactSlider onChange={this.onKmChange} className="horizontal-slider" withBars step={1000} min={minKm} max={maxKm}>
+        <ReactSlider onChange={this.onKmChange} value={[cMinKm, cMaxKm]} className="horizontal-slider" withBars step={1000} min={minKm} max={maxKm}>
           <div className="min">{cMinKm}</div>
           <div className="max">{cMaxKm}</div>
         </ReactSlider>
