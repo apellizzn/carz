@@ -18,7 +18,7 @@ class Car < ActiveRecord::Base
   }
   reverse_geocoded_by :latitude, :longitude, :address => :full_address
 
-  default_scope { includes(:brand) }
+  default_scope { includes(:brand,:fuel) }
 
   scope  :from_price, -> (price) {
     price ? where(price: (price.to_f)..Float::INFINITY) : Car.all
@@ -49,7 +49,7 @@ class Car < ActiveRecord::Base
   }
 
   def as_json options={}
-    super(include: { brand: { only: [:name] } })
+    super(include: { brand: { only: [:name] }, fuel: { only: [:name] } })
   end
 
   def self.available_colors

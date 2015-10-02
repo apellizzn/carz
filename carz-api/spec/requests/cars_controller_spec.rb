@@ -33,6 +33,13 @@ describe CarsController do
       expect(response).to have_http_status(:success)
     end
 
+    it "returns brand and fuel info" do
+      car = FactoryGirl.create :car
+      get '/cars'
+      expect(content.first["brand"]).to eq({ "name" => car.brand.name })
+      expect(content.first["fuel"]).to eq({ "name" => car.fuel.name })
+    end
+
     context 'with many cars' do
       before {
          3.times { FactoryGirl.create :car }
