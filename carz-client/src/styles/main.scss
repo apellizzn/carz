@@ -84,9 +84,12 @@
   }
 }
 
-#car-list {
+#car-list, #car-details{
   margin-left: 20px;
   float: left;
+}
+
+#car-list {
   display: table;
   label {
     display: block;

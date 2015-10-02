@@ -39,7 +39,7 @@ export default React.createClass({
           Most features are left unimplemented with clues to guide you on the learning process.
         </p>
         <CarFilters brands={brands} fuels={fuels} colors={colors}/>
-        <CarList cars={cars} />
+        <CarList cars={cars}/>
       </div>
     );
   },

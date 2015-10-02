@@ -2,17 +2,15 @@ import React, {PropTypes} from 'react';
 import ActionCreator from '../actions/TodoActionCreators';
 import {Card, CardMedia, CardTitle} from 'material-ui';
 
-
 export default React.createClass({
   propTypes: {
-    car: PropTypes.object.isRequired,
-    openCar: PropTypes.func.isRequired
+    car: PropTypes.object.isRequired
   },
 
   render() {
     const car = this.props.car;
     return (
-      <Card onClick={this.openCar.bind(this, car.id)} className="card">
+      <Card className="card">
         <CardMedia overlay={
           <CardTitle className="car-properties" title={car.brand.name + ' ' + car.name}
             subtitle={
@@ -35,10 +33,5 @@ export default React.createClass({
     if (this.refs.checkbox.isChecked()) {
       ActionCreator.completeTask(task);
     }
-  },
-
-  openCar(carId) {
-    console.log(carId);
-    this.props.openCar(carId);
   }
 });
