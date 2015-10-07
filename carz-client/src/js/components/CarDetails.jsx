@@ -1,5 +1,5 @@
 import React, {PropTypes} from 'react';
-import {Paper, Tab, Tabs, List, ListItem} from 'material-ui';
+import {Paper, Tab, Tabs, List, ListItem, Card, CardMedia, CardTitle} from 'material-ui';
 import {GoogleMap, Marker} from 'react-google-maps';
 
 export default React.createClass({
@@ -11,7 +11,11 @@ export default React.createClass({
     const car = this.props.car;
     return (
       <Paper id="car-details" zDepth={2}>
-        <img src="http://lorempixel.com/600/337/nature/"/>
+        <Card className="card">
+          <CardMedia overlay={<CardTitle className="car-properties" title={car.name}/>}>
+            <img src="http://lorempixel.com/600/337/nature/"/>
+          </CardMedia>
+        </Card>
         <Tabs>
           <Tab label="Details">
             <List className="car-properties car-properties1">
@@ -31,7 +35,7 @@ export default React.createClass({
                 style: { height: '300px' }
               }}
               ref="map"
-              defaultZoom={3}
+              defaultZoom={15}
               defaultCenter={{lat: car.latitude, lng: car.longitude}}>
                 <Marker
                   position={{lat: car.latitude, lng: car.longitude}}

@@ -6,11 +6,20 @@
 h3{
   font-size: 20px;
 }
-.example-page {
+.main-page {
   margin: auto;
   padding: 50px;
   width: 80%;
   text-align: center;
+  .car-properties {
+    width: 50%
+  }
+  .car-properties1 {
+    float: left;
+  }
+  .car-properties2 {
+    float: right;
+  }
 }
 
 #car-filters {
@@ -87,18 +96,9 @@ h3{
   }
 }
 
-#car-list, #car-details{
+#car-list {
   margin-left: 20px;
   float: left;
-  .car-properties {
-    width: 50%
-  }
-  .car-properties1 {
-    float: left;
-  }
-  .car-properties2 {
-    float: right;
-  }
 }
 
 #car-list {
