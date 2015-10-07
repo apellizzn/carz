@@ -3,6 +3,9 @@
 @import url(http://fonts.googleapis.com/css?family=Roboto:400,300,500);
 
 //Your custom app styles
+h3{
+  font-size: 20px;
+}
 .example-page {
   margin: auto;
   padding: 50px;
@@ -87,6 +90,15 @@
 #car-list, #car-details{
   margin-left: 20px;
   float: left;
+  .car-properties {
+    width: 50%
+  }
+  .car-properties1 {
+    float: left;
+  }
+  .car-properties2 {
+    float: right;
+  }
 }
 
 #car-list {

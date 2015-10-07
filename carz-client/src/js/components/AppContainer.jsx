@@ -1,6 +1,9 @@
 import React from 'react';
 import CarStore from '../stores/CarStore';
 import App from './App.jsx';
+import injectTapEventPlugin from 'react-tap-event-plugin';
+injectTapEventPlugin();
+
 
 export default React.createClass({
 

@@ -1,6 +1,6 @@
 import React, {PropTypes} from 'react';
-import ActionCreator from '../actions/TodoActionCreators';
-import {Card, CardMedia, CardTitle} from 'material-ui';
+import {Paper, Tab, Tabs, List, ListItem} from 'material-ui';
+import {GoogleMap, Marker} from 'react-google-maps';
 
 export default React.createClass({
   propTypes: {
@@ -10,28 +10,38 @@ export default React.createClass({
   render() {
     const car = this.props.car;
     return (
-      <Card className="card">
-        <CardMedia overlay={
-          <CardTitle className="car-properties" title={car.brand.name + ' ' + car.name}
-            subtitle={
-              <div>
-                <div>Year :  {car.year}</div>
-                <div>Price : {car.price.toLocaleString() + ' €'}</div>
-                <div>Km : {car.km.toLocaleString()}</div>
-                <div>Fuel : {car.fuel.name}</div>
-              </div>
-            }
-          />}
-        >
-          <img src="http://lorempixel.com/600/337/nature/"/>
-        </CardMedia>
-      </Card>
+      <Paper id="car-details" zDepth={2}>
+        <img src="http://lorempixel.com/600/337/nature/"/>
+        <Tabs>
+          <Tab label="Details">
+            <List className="car-properties car-properties1">
+              <ListItem primaryText="Year" secondaryText={car.year}/>
+              <ListItem primaryText="Km" secondaryText={car.km.toLocaleString()}/>
+              <ListItem primaryText="Price" secondaryText={car.price.toLocaleString() + ' €'}/>
+            </List>
+            <List className="car-properties car-properties2">
+              <ListItem primaryText="Fuel" secondaryText={car.fuel.name}/>
+              <ListItem primaryText="Brand" secondaryText={car.brand.name}/>
+              <ListItem style={{ borderBottom: '1px solid ' + car.color }} primaryText="Color" secondaryText={car.color}/>
+            </List>
+          </Tab>
+          <Tab label="Find">
+            <GoogleMap
+              containerProps={{
+                style: { height: '300px' }
+              }}
+              ref="map"
+              defaultZoom={3}
+              defaultCenter={{lat: car.latitude, lng: car.longitude}}>
+                <Marker
+                  position={{lat: car.latitude, lng: car.longitude}}
+                  key="position"
+                  defaultAnimation={2}
+                />
+              </GoogleMap>
+          </Tab>
+        </Tabs>
+      </Paper>
     );
-  },
-
-  handleToggle(task) {
-    if (this.refs.checkbox.isChecked()) {
-      ActionCreator.completeTask(task);
-    }
   }
 });
