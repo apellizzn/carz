@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   root 'cars#index'
   resources :cars do
-  	collection do 
+  	collection do
   	  get :colors
   	end
     resources :photos

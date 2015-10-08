@@ -9,6 +9,10 @@ class CarsController < ApplicationController
       .paginate(pagination)
   end
 
+  def show
+    render json: Car.find(params[:id])
+  end
+
   def colors
     render json: Car.available_colors
   end

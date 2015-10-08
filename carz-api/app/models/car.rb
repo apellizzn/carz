@@ -49,7 +49,7 @@ class Car < ActiveRecord::Base
   }
 
   def as_json options={}
-    super(include: { brand: { only: [:name] }, fuel: { only: [:name] } })
+    super(include: { brand: { only: [:name] }, fuel: { only: [:name] } }, except: [:updated_at, :created_at])
   end
 
   def self.available_colors

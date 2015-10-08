@@ -8,6 +8,12 @@ class ApplicationController < ActionController::Base
   before_filter :cors_preflight_check
   after_filter :cors_set_access_control_headers
 
+  rescue_from ActiveRecord::RecordNotFound, with: :not_found
+
+  def not_found
+    render json: { error: 'not_found'}, status: :not_found
+  end
+
   def cors_set_access_control_headers
     headers['Access-Control-Allow-Origin'] = '*'
     headers['Access-Control-Allow-Methods'] = 'POST, GET, PUT, DELETE, OPTIONS'

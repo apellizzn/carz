@@ -26,7 +26,30 @@ describe CarsController do
     end
   end
 
-  describe 'GET #index' do
+  describe 'GET /cars/:id' do
+    let(:car) { FactoryGirl.create :car }
+
+    context 'when existing' do
+      before { get "/cars/#{car.id}" }
+
+      it 'returns http success' do
+        expect(response).to have_http_status(:success)
+      end
+
+      it 'returns the car' do
+        expect(content).to eq(car.as_json)
+      end
+    end
+
+    context 'when not existing' do
+      it 'returns not found' do
+        get 'cars/unexisting'
+        expect(response).to have_http_status(:not_found)
+      end
+    end
+  end
+
+  describe 'GET /cars' do
 
     it "returns http success" do
       get '/cars'
