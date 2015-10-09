@@ -1,11 +1,11 @@
 import React, {PropTypes} from 'react';
+import { Link } from 'react-router';
 import Car from './Car.jsx';
 
 export default React.createClass({
 
   propTypes: {
-    cars: PropTypes.array.isRequired,
-    openCar: PropTypes.func.isRequired
+    cars: PropTypes.array.isRequired
   },
 
   getDefaultProps() {
@@ -18,12 +18,12 @@ export default React.createClass({
     const cars = this.props.cars;
     return (
       <div id="car-list">
-        {cars.map(car => <Car openCar={this.openCar} key={car.id} car={car} />)}
+        {cars.map(car =>
+          <Link to={'/' + car.id}>
+            <Car  key={car.id} car={car} />
+          </Link>
+        )}
       </div>
     );
-  },
-
-  openCar(carId) {
-    this.props.openCar(carId);
   }
 });

@@ -1,6 +1,6 @@
 import React, {PropTypes} from 'react';
 import ReactSlider  from 'react-slider';
-import ActionCreator from '../actions/TodoActionCreators';
+import ActionCreator from '../actions/ActionCreator';
 import _ from 'lodash';
 import CollapsedFilter from './CollapsedFilter.jsx';
 import {Paper, FlatButton} from 'material-ui';

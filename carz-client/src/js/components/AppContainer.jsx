@@ -1,32 +1,22 @@
 import React from 'react';
-import CarStore from '../stores/CarStore';
+import {Router, Route, IndexRoute} from 'react-router';
 import App from './App.jsx';
+import CarsWrapper from '../wrappers/CarsWrapper.jsx';
+import CarDetailsWrapper from '../wrappers/CarDetailsWrapper.jsx';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 injectTapEventPlugin();
 
 
 export default React.createClass({
 
-  getInitialState() {
-    return CarStore.getAll();
-  },
-
-  componentDidMount() {
-    CarStore.addChangeListener(this._onChange);
-  },
-
-  componentWillUnmount() {
-    CarStore.removeChangeListener(this._onChange);
-  },
-
   render() {
-    let {cars, brands, fuels, colors} = this.state;
     return (
-      <App cars={cars} brands={brands} fuels={fuels} colors={colors}/>
+      <Router>
+        <Route path="/" component={App}>
+          <IndexRoute component={CarsWrapper}/>
+          <Route path="/:carId" component={CarDetailsWrapper}/>
+        </Route>
+      </Router>
     );
-  },
-
-  _onChange() {
-    this.setState(CarStore.getAll());
   }
 });

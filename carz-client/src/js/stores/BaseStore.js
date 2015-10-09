@@ -4,16 +4,18 @@ import {EventEmitter} from 'events';
 
 export default assign({}, EventEmitter.prototype, {
   // Allow Controller-View to register itself with store
-  addChangeListener(callback) {
-    this.on(Constants.CHANGE_EVENT, callback);
+  addChangeListener(callback, changeEvent) {
+    const event = changeEvent || Constants.CHANGE_EVENT;
+    this.on(event, callback);
   },
 
-  removeChangeListener(callback) {
-    this.removeListener(Constants.CHANGE_EVENT, callback);
+  removeChangeListener(callback, changeEvent) {
+    const event = changeEvent || Constants.CHANGE_EVENT;
+    this.removeListener(event, callback);
   },
 
   // triggers change listener above, firing controller-view callback
-  emitChange() {
-    this.emit(Constants.CHANGE_EVENT);
+  emitChange(changeEvent) {
+    this.emit(changeEvent || Constants.CHANGE_EVENT);
   }
 });

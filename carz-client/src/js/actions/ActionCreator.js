@@ -13,6 +13,15 @@ export default {
     return object;
   },
 
+  loadCar(carId) {
+    Ajax.get(Constants.API.CARS + '/' + carId, data => {
+      Dispatcher.handleServerAction({
+        type: Constants.ActionTypes.CAR_FETCHED,
+        car: data
+      });
+    });
+  },
+
   loadColors() {
     Ajax.get(Constants.API.COLORS, data => {
       Dispatcher.handleServerAction({

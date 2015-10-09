@@ -4,7 +4,12 @@ import BaseStore from './BaseStore';
 import assign from 'object-assign';
 
 // data storage
-let _data = { cars: [], brands: [], fuels: [], colors: [] };
+let _data = {  cars: [], colors: [] };
+let _car = { fuel: {}, brand: {} };
+
+function loadCar(car) {
+  _car = car;
+}
 
 function loadCars(cars) {
   _data.cars = cars;
@@ -14,18 +19,15 @@ function loadColors(colors) {
   _data.colors = colors;
 }
 
-function loadFules(fuels) {
-  _data.fuels = fuels;
-}
-
-function loadBrands(brands) {
-  _data.brands = brands;
-}
 // Facebook style store creation.
 const CarStore = assign({}, BaseStore, {
   // public methods used by Controller-View to operate on data
   getAll() {
     return _data;
+  },
+
+  getCar() {
+    return _car;
   },
 
   // register store with dispatcher, allowing actions to flow through
@@ -37,20 +39,15 @@ const CarStore = assign({}, BaseStore, {
       loadColors(colors);
       CarStore.emitChange();
       break;
-    case Constants.ActionTypes.FUELS_FETCHED:
-      const fuels = action.fuels;
-      loadFules(fuels);
-      CarStore.emitChange();
-      break;
     case Constants.ActionTypes.CARS_FETCHED:
       const cars = action.cars;
       loadCars(cars);
       CarStore.emitChange();
       break;
-    case Constants.ActionTypes.BRANDS_FETCHED:
-      const brands = action.brands;
-      loadBrands(brands);
-      CarStore.emitChange();
+    case Constants.ActionTypes.CAR_FETCHED:
+      const car = action.car;
+      loadCar(car);
+      CarStore.emitChange(Constants.CHANGE_CAR);
       break;
     default:
       console.warn('not yet implemented...');
